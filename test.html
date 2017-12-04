@@ -13,6 +13,22 @@
   <input type="text" name="username" placeholder="username">
   <input type="password" name="password" placeholder="password">
   <input type="submit">
+  <input type="button" value="logout" id="logout">
+</form>
+<form id="signup">
+  <input type="text" name="username" placeholder="username">
+  <input type="password" name="password" placeholder="password">
+  <input type="email" name="email" placeholder="email">
+  <input type="submit">
+</form>
+<form id="changeemail">
+  <input type="email" name="email" placeholder="changeemail">
+  <input type="submit">
+</form>
+<form id="changepassword">
+  <input type="password" name="md5pass" placeholder="originpassword">
+  <input type="password" name="newmd5pass" placeholder="originpassword">
+  <input type="submit">
 </form>
 <script>
   $("#form input[type='submit']").click(function(e){
@@ -20,6 +36,38 @@
     $.post('http://127.0.0.1/api/index.php/login/login',{
       username: $('form input[name="username"]').val(),
       md5pass: md5($('form input[name="password"]').val()),
+    },function(data){
+      console.log(data)
+    })
+  })
+  $("#logout").click(function(){
+    $.get('http://127.0.0.1/api/index.php/login/logout',{},function(data){
+      console.log(data)
+    })
+  })
+  $("#signup input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.post('http://127.0.0.1/api/index.php/login/signup',{
+      username: $('#signup input[name="username"]').val(),
+      md5pass: md5($('#signup input[name="password"]').val()),
+      email: $('#signup input[name="email"]').val(),
+    },function(data){
+      console.log(data)
+    })
+  })
+  $("#changeemail input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.post('http://127.0.0.1/api/index.php/updateuser/email',{
+      email: $('#changeemail input[name="email"]').val(),
+    },function(data){
+      console.log(data)
+    })
+  })
+  $("#changepassword input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.post('http://127.0.0.1/api/index.php/updateuser/password',{
+      md5pass: md5($('#changepassword input[name="md5pass"]').val()),
+      newmd5pass: md5($('#changepassword input[name="newmd5pass"]').val()),
     },function(data){
       console.log(data)
     })

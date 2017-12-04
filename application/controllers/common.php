@@ -10,15 +10,6 @@ class Common extends CI_Controller
         $this->load->library('session');
     }
 
-    protected function auth_check($auth = 0)
-    {
-        if(!$this->session->username)
-        {
-            $this->json_fail('无登陆信息，请先登录');
-            return 0;
-        }
-    }
-
     protected function json_return($data)
     {
         $this->output
@@ -31,7 +22,7 @@ class Common extends CI_Controller
     protected function json_success($msg = '', $data = array())
     {
         $this->json_return(array(
-            "status" => 'success',
+            "status" => 200,
             "message" => $msg,
             "result" => $data
         ));
@@ -40,7 +31,7 @@ class Common extends CI_Controller
     protected function json_fail($msg = '', $data = array())
     {
         $this->json_return(array(
-            "status" => 'fail',
+            "status" => 400,
             "message" => $msg,
             "result" => $data
         ));
