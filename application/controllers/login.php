@@ -39,7 +39,6 @@ class Login extends Common {
           'email' => $this->input->post('email',true),
           'created_time' => time(),
       );
-      echo time();
       $result = $this->User_model->signup($data);
       if($result){
         $this->json_success("注册成功！");

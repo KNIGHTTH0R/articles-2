@@ -30,6 +30,27 @@
   <input type="password" name="newmd5pass" placeholder="originpassword">
   <input type="submit">
 </form>
+<form id="article">
+  <input type="text" name="title" placeholder="title">
+  <input type="text" name="content" placeholder="content">
+  <input type="number" name="isPublic" placeholder="isPublic">
+  <input type="submit">
+</form>
+<form id="query">
+  <input type="number" name="articleid" placeholder="articleid">
+  <input type="submit">
+</form>
+<form id="remove">
+  <input type="number" name="articleid" placeholder="remove articleid">
+  <input type="submit">
+</form>
+<form id="update">
+  <input type="number" name="articleid" placeholder="update articleid">
+  <input type="text" name="title" placeholder="title">
+  <input type="text" name="content" placeholder="content">
+  <input type="number" name="isPublic" placeholder="isPublic">
+  <input type="submit">
+</form>
 <script>
   $("#form input[type='submit']").click(function(e){
     e.preventDefault()
@@ -68,6 +89,39 @@
     $.post('http://127.0.0.1/api/index.php/updateuser/password',{
       md5pass: md5($('#changepassword input[name="md5pass"]').val()),
       newmd5pass: md5($('#changepassword input[name="newmd5pass"]').val()),
+    },function(data){
+      console.log(data)
+    })
+  })
+  $("#article input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.post('http://127.0.0.1/api/index.php/article/create',{
+      title: $('#article input[name="title"]').val(),
+      content: $('#article input[name="content"]').val(),
+      isPublic: $('#article input[name="isPublic"]').val(),
+    },function(data){
+      console.log(data)
+    })
+  })
+  $("#query input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.get('http://127.0.0.1/api/index.php/article/query/' + $("#query input[name='articleid']").val(),{},function(data){
+      console.log(data)
+    })
+  })
+  $("#remove input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.get('http://127.0.0.1/api/index.php/article/remove/' + $("#remove input[name='articleid']").val(),{},function(data){
+      console.log(data)
+    })
+  })
+  $("#update input[type='submit']").click(function(e){
+    e.preventDefault()
+    $.post('http://127.0.0.1/api/index.php/article/update',{
+      articleid: $("#update input[name='articleid']").val(),
+      title: $('#update input[name="title"]').val(),
+      content: $('#update input[name="content"]').val(),
+      isPublic: $('#update input[name="isPublic"]').val(),
     },function(data){
       console.log(data)
     })

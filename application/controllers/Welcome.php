@@ -5,6 +5,6 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		echo "Hello gay!Boy♂next♂door~";
+		echo "Hello gay!Boy ♂ next ♂ door~";
 	}
 }

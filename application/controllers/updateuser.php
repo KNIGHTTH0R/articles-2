@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once("Common.php");
 
-class UpdateUser extends Common {
+class Updateuser extends Common {
 
     public function __construct()
     {
