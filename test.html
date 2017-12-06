@@ -51,6 +51,7 @@
   <input type="number" name="isPublic" placeholder="isPublic">
   <input type="submit">
 </form>
+<button id="userlist">get user list</button>
 <script>
   $("#form input[type='submit']").click(function(e){
     e.preventDefault()
@@ -126,6 +127,12 @@
       console.log(data)
     })
   })
+  $('#userlist').click(function(){
+    $.get('http://127.0.0.1/api/index.php/articlelist/query_user/0/5',{},function(data){
+      console.log(data)
+    });
+  })
+
 </script>
 </body>
 </html>

@@ -23,7 +23,7 @@ class Article_model extends CI_Model {
       ));
     }
     public function query_article($id){
-      return $this->db->select('title,content,articles_article.created_time,articles_article.id,is_public,a.username')->where(array(
+      return $this->db->select('title,content,articles_article.created_time,articles_article.id,is_public,a.username,is_public')->where(array(
         'articles_article.id = ' => $id,
         'is_deleted !=' => 1
       ))->order_by('articles_article.created_time','DESC')->join('articles_user as a', 'a.id = articles_article.author_id', 'left')->get('articles_article',1)->result_array();
