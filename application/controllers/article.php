@@ -93,13 +93,11 @@ class Article extends Common {
       if($articleid){
         $result = $this->Article_model->query_article($articleid);
         if($result){
-          $this->json_success("查询成功",$result);
-        } else {
-          $this->json_fail("查询失败！可能原因：文章不存在");
-        }
-      } else {
-        $this->json_fail("查询失败！请输入文章id。");
-      }
+          if($result[0]['username'] != $this->session->username && $result[0]['is_public'] == 0){
+            $this->json_fail("查询失败！可能原因：这是别人的私密文章！");
+          } else $this->json_success("查询成功",$result);
+        } else $this->json_fail("查询失败！可能原因：文章不存在");
+      } else $this->json_fail("查询失败！请输入文章id。");
     }
     public function remove(){
       $articleid = $this->uri->segment(3, 0);
